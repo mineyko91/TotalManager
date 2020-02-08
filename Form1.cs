@@ -20,10 +20,6 @@ namespace FileManager
             FillTreeNodes(treeView2, GetDirectoryNodes(@"D:\Docs"));
         }
 
-        private static void FillTreeNode(TreeView tree, TreeNode node, string path)
-        {
-
-        }
 
         private static void FillTreeNodes(TreeView tree, TreeNode[] nodes)
         {

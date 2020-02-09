@@ -5,6 +5,9 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Security;
+using System.Security.AccessControl;
+using System.Security.Permissions;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -16,7 +19,7 @@ namespace FileManager
         public TotalManager()
         {
             InitializeComponent();
-            FillTreeNode(treeView1, GetDirectoryNodes(@"D:\MUSIC\"));
+            FillTreeNode(treeView1, GetDriveNodes());
         }
 
         private static void FillTreeNode(TreeView tree, TreeNode[] nodes)
@@ -27,37 +30,45 @@ namespace FileManager
             }
         }
 
-        private static void FillNode(TreeNode node, TreeNode[] nodes)
+        private static void FillNode(TreeNode node, List<string> nodes)
         {
             node.Nodes.Clear();
 
-            foreach (TreeNode n in nodes)
+            foreach (string n in nodes)
             {
-                FillNodesToNode(node.Nodes.Add(n.Text));
+                TreeNode newNode = new TreeNode(n);
+                FillNodesToNode(node.Nodes.Add(n));
             }
         }
 
         private static void FillNodesToNode(TreeNode node)
         {
-            TreeNode[] dirNodes = GetDirectoryNodes(node.Text);
+            List<string> dirNodes = GetDirectoryNodes(node.Text);
 
-            foreach (TreeNode n in dirNodes)
+            foreach (string n in dirNodes)
             {
                 node.Nodes.Add(n);
             }
         }
 
-
-        private static TreeNode[] GetDirectoryNodes(string path)
+        private static List<string> GetDirectoryNodes(string path)
         {
-            DirectoryInfo directory = new DirectoryInfo(path);
-            DirectoryInfo[] subDirectories = directory.GetDirectories();
+            List<string> subDirectories = new List<string>();
 
-            TreeNode[] nodes = new TreeNode[subDirectories.Length];
-
-            for (int i = 0; i < nodes.Length; i++)
+            try
             {
-                nodes[i] = new TreeNode(subDirectories[i].FullName);
+                subDirectories.AddRange(Directory.GetDirectories(path));
+            }
+            catch (UnauthorizedAccessException)
+            {
+
+            }
+
+            List<string> nodes = new List<string>();
+
+            foreach (string item in subDirectories)
+            {
+                nodes.Add(item);
             }
 
             return nodes;

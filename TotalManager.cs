@@ -11,43 +11,42 @@ using System.Windows.Forms;
 
 namespace FileManager
 {
-    public partial class Form1 : Form
+    public partial class TotalManager : Form
     {
-        public Form1()
+        public TotalManager()
         {
             InitializeComponent();
-            // FillTreeNodes(treeView1, GetDriveNodes());
-            FillTreeNodes(treeView2, GetDirectoryNodes(@"D:\Docs"));
+            FillTreeNode(treeView1, GetDirectoryNodes(@"D:\MUSIC\"));
         }
 
-
-        private static void FillTreeNodes(TreeView tree, TreeNode[] nodes)
+        private static void FillTreeNode(TreeView tree, TreeNode[] nodes)
         {
-            foreach (var n in nodes)
+            foreach (TreeNode n in nodes)
             {
-                tree.Nodes.Add(n.Text);
-                BuildTree(n, "");
+                FillNodesToNode(tree.Nodes.Add(n.Text));
             }
         }
 
-        private static void BuildTree(TreeNode node, string path)
+        private static void FillNode(TreeNode node, TreeNode[] nodes)
         {
-            node = new TreeNode(path);
+            node.Nodes.Clear();
 
-            foreach (TreeNode n in node.Nodes)
+            foreach (TreeNode n in nodes)
             {
-                BuildTree(n, Directory.GetCurrentDirectory());
+                FillNodesToNode(node.Nodes.Add(n.Text));
             }
         }
 
-
-
-        private static void Method(TreeNode[] nodes)
+        private static void FillNodesToNode(TreeNode node)
         {
-            foreach (TreeNode item in nodes)
+            TreeNode[] dirNodes = GetDirectoryNodes(node.Text);
+
+            foreach (TreeNode n in dirNodes)
             {
+                node.Nodes.Add(n);
             }
         }
+
 
         private static TreeNode[] GetDirectoryNodes(string path)
         {
@@ -77,9 +76,9 @@ namespace FileManager
             return nodes;
         }
 
-        private void TreeView1_DoubleClick(object sender, EventArgs e)
+        private void TreeView_AfterExpand(object sender, TreeViewEventArgs e)
         {
-
+            FillNode(e.Node, GetDirectoryNodes(e.Node.Text));
         }
     }
 }

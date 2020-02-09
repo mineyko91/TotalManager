@@ -1,6 +1,6 @@
 ﻿namespace FileManager
 {
-    partial class Form1
+    partial class TotalManager
     {
         /// <summary>
         /// Обязательная переменная конструктора.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TotalManager));
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
@@ -138,7 +138,7 @@
             // 
             this.splitContainer2.Panel2.Controls.Add(this.treeView2);
             this.splitContainer2.Size = new System.Drawing.Size(971, 241);
-            this.splitContainer2.SplitterDistance = 471;
+            this.splitContainer2.SplitterDistance = 470;
             this.splitContainer2.TabIndex = 0;
             // 
             // treeView1
@@ -146,16 +146,16 @@
             this.treeView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeView1.Location = new System.Drawing.Point(0, 0);
             this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(467, 237);
+            this.treeView1.Size = new System.Drawing.Size(466, 237);
             this.treeView1.TabIndex = 0;
-            this.treeView1.DoubleClick += new System.EventHandler(this.TreeView1_DoubleClick);
+            this.treeView1.AfterExpand += new System.Windows.Forms.TreeViewEventHandler(this.TreeView_AfterExpand);
             // 
             // treeView2
             // 
             this.treeView2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeView2.Location = new System.Drawing.Point(0, 0);
             this.treeView2.Name = "treeView2";
-            this.treeView2.Size = new System.Drawing.Size(492, 237);
+            this.treeView2.Size = new System.Drawing.Size(493, 237);
             this.treeView2.TabIndex = 1;
             // 
             // splitContainer3
@@ -174,7 +174,7 @@
             // 
             this.splitContainer3.Panel2.Controls.Add(this.treeView4);
             this.splitContainer3.Size = new System.Drawing.Size(971, 290);
-            this.splitContainer3.SplitterDistance = 464;
+            this.splitContainer3.SplitterDistance = 463;
             this.splitContainer3.TabIndex = 0;
             // 
             // treeView3
@@ -182,7 +182,7 @@
             this.treeView3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeView3.Location = new System.Drawing.Point(0, 0);
             this.treeView3.Name = "treeView3";
-            this.treeView3.Size = new System.Drawing.Size(460, 286);
+            this.treeView3.Size = new System.Drawing.Size(459, 286);
             this.treeView3.TabIndex = 1;
             // 
             // treeView4
@@ -190,7 +190,7 @@
             this.treeView4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeView4.Location = new System.Drawing.Point(0, 0);
             this.treeView4.Name = "treeView4";
-            this.treeView4.Size = new System.Drawing.Size(499, 286);
+            this.treeView4.Size = new System.Drawing.Size(500, 286);
             this.treeView4.TabIndex = 1;
             // 
             // Form1
